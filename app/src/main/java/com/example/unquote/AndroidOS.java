@@ -17,7 +17,7 @@ Question questionThree = new Question(748294, "What is the name for the patch of
     }
 
     public String toString(Question question){
-return (question.imageId)+" "+(question.questionText)+" "+(question.answer0)+" "+(question.answer1)+" "+(question.answer2)+" "+(question.answer3)+" "+(question.correctAnswer)+" "+(question.playerAnswer);
+return "Image ID: "+(question.imageId)+". Question: "+(question.questionText)+". Option One: "+(question.answer0)+". Option Two: "+(question.answer1)+". Option Three: "+(question.answer2)+". Option Four: "+(question.answer3)+". Correct Answer: "+(question.correctAnswer)+". Player Answer: "+(question.playerAnswer);
     }
 
     public static void main(String[] args) {
