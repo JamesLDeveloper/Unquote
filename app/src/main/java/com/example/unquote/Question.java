@@ -22,8 +22,8 @@ correctAnswer = correctAnswerIndex;
 playerAnswer = -1;
 }
 
-public boolean isCorrect(Question question){
-if (question.playerAnswer == question.correctAnswer){
+public boolean isCorrect(){
+if (playerAnswer == correctAnswer){
     return true;
 }
 else return false;
