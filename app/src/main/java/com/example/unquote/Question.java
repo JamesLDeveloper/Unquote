@@ -10,7 +10,7 @@ String answer1;
 String answer2;
 String answer3;
 
-public Question(int imageIdentifier, String questionString, String answerZero, String answerOne, String answerTwo, String answerThree, int correctAnswerIndex, int defaultPlayerAnswer){
+public Question(int imageIdentifier, String questionString, String answerZero, String answerOne, String answerTwo, String answerThree, int correctAnswerIndex){
 
 imageId = imageIdentifier;
 questionText = questionString;
@@ -19,7 +19,15 @@ answer1 = answerOne;
 answer2 = answerTwo;
 answer3 = answerThree;
 correctAnswer = correctAnswerIndex;
-playerAnswer = defaultPlayerAnswer;
+playerAnswer = -1;
 }
+
+public boolean isCorrect(Question question){
+if (question.playerAnswer == question.correctAnswer){
+    return true;
+}
+else return false;
+}
+
 }
 

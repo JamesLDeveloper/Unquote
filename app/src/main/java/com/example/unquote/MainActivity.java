@@ -34,4 +34,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    public int generateRandomNumber(int max){
+double randomNumber = Math.random();
+int randomIntNumber = (int)(randomNumber * max);
+System.out.println(randomIntNumber);
+        return randomIntNumber;
+    }
+
+
 }
