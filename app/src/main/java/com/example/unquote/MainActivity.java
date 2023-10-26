@@ -51,13 +51,46 @@ public class MainActivity extends AppCompatActivity {
     // TODO #3 add startNewGame() here
 
     public void startNewGame(){
+
+        Question questionOne = new Question(921238, "How tall is the Eiffel tower?", "1024 ft", "1063 ft", "1124 ft", "1163 ft", 1);
+        Question questionTwo = new Question(107343, "Who invented the computer algorithm?", "Charles Babbage", "John Carmack", "Alan Turing", "Ada Lovelace",3);
+        Question questionThree = new Question(748294, "What is the name for the patch of skin found on your elbow?", "Elbow Skin", "Fascia Elbora", "Wenis", "Todd", 2);
+
+        questions = new ArrayList<>();
+            questions.add(questionOne);
+            questions.add(questionTwo);
+            questions.add(questionThree);
+
+            totalCorrect = 0;
+            totalQuestions = questions.size();
+
+        Question firstQuestion = chooseNewQuestion();
+// displayQuestion(firstQuestion);
+// displayQuestionsRemaining(questions.size());
+
     }
 
     // TODO #4 add chooseNewQuestion() here
 
+    public Question chooseNewQuestion(){
+int randomNumber = generateRandomNumber(totalQuestions-1);
+        currentQuestionIndex = randomNumber;
+return questions.get(currentQuestionIndex);
+
+    }
+
     // TODO #5 add getCurrentQuestion() here
 
+public Question getCurrentQuestion(){
+       Question currentQuestion = questions.get(currentQuestionIndex);
+       return currentQuestion;
+}
+
     // TODO #6 add onAnswerSubmission() here
+
+    public void onAnswerSubmission(){
+    }
+
 
     public int generateRandomNumber(int max){
 double randomNumber = Math.random();
