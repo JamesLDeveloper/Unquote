@@ -57,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
         Question questionThree = new Question(748294, "What is the name for the patch of skin found on your elbow?", "Elbow Skin", "Fascia Elbora", "Wenis", "Todd", 2);
 
         questions = new ArrayList<>();
-            questions.add(questionOne);
-            questions.add(questionTwo);
-            questions.add(questionThree);
+        questions.add(questionOne);
+        questions.add(questionTwo);
+        questions.add(questionThree);
 
-            totalCorrect = 0;
-            totalQuestions = questions.size();
+        totalCorrect = 0;
+        totalQuestions = questions.size();
 
         Question firstQuestion = chooseNewQuestion();
 // displayQuestion(firstQuestion);
@@ -88,17 +88,31 @@ public Question getCurrentQuestion(){
 
     // TODO #6 add onAnswerSubmission() here
 
+    // TODO #6 add onAnswerSubmission() here
     public void onAnswerSubmission(){
-        if (getCurrentQuestion().isCorrect());
+        if (getCurrentQuestion().isCorrect()){
             totalCorrect ++;
+            System.out.println("That's correct");
+        } else {
+            System.out.println("Sorry the correct answer was" + getCurrentQuestion().correctAnswer);
+        }
+        questions.remove(getCurrentQuestion());
+        // displayQuestionsRemaining(questions.size());
+        if (questions.size() == 0) {
+            System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
+            startNewGame();
+        } else {
+            chooseNewQuestion();
+            // TODO: uncomment after implementing displayQuestion()
+// displayQuestion(getCurrentQuestion());
         }
 
-// displayQuestionsRemaining(questions.size());
-
+    }
+    
     public int generateRandomNumber(int max){
-double randomNumber = Math.random();
-int randomIntNumber = (int)(randomNumber * max);
-//System.out.println(randomIntNumber);
+        double randomNumber = Math.random();
+        int randomIntNumber = (int)(randomNumber * max);
+        //System.out.println(randomIntNumber);
         return randomIntNumber;
     }
 
