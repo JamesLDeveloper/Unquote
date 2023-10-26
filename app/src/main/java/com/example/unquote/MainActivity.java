@@ -89,8 +89,11 @@ public Question getCurrentQuestion(){
     // TODO #6 add onAnswerSubmission() here
 
     public void onAnswerSubmission(){
-    }
+        if (getCurrentQuestion().isCorrect());
+            totalCorrect ++;
+        }
 
+// displayQuestionsRemaining(questions.size());
 
     public int generateRandomNumber(int max){
 double randomNumber = Math.random();
