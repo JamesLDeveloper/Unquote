@@ -108,7 +108,7 @@ public Question getCurrentQuestion(){
         }
 
     }
-    
+
     public int generateRandomNumber(int max){
         double randomNumber = Math.random();
         int randomIntNumber = (int)(randomNumber * max);
