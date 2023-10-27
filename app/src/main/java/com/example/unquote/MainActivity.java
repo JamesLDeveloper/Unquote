@@ -1,6 +1,9 @@
 package com.example.unquote;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,11 +19,28 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivityTag";
+
+    private static final String CONTACT_1 = "Jim Bob";
+    private static final String CONTACT_2 = "Mary Jane";
+
 //    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //This has been added to make a blank screen rather than one with standard navigation buttons at the bottom
+
+        //
+        View contactCard1=findViewById(R.id.incl_cardview_contact_card_main_1);
+        Log.d(TAG, "Contact Card 1 is type: " + contactCard1.getClass().getName());
+        TextView contactName1 = contactCard1.findViewById(R.id.tv_contact_card);
+        contactName1.setText(CONTACT_1);
+
+        TextView contactName2 = findViewById(R.id.incl_cardview_contact_card_main_2).findViewById(R.id.tv_contact_card);
+        contactName2.setText(CONTACT_2);
+
+
+        //
 
         /*        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
