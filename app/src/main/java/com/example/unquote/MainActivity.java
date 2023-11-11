@@ -7,6 +7,13 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 //import androidx.navigation.NavController;
 //import androidx.navigation.Navigation;
@@ -17,10 +24,19 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
 //    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // TODO 2-G: Show app icon in ActionBar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_unquote_icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setElevation(0);
+
+
         setContentView(R.layout.activity_main); //This has been added to make a blank screen rather than one with standard navigation buttons at the bottom
 
         /*        binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -37,7 +53,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         */
 
+
+        // TODO 3-B: assign View member variables
+
+        // TODO 4-E: set onClickListener for each answer Button
+
+        // TODO 5-A: set onClickListener for the submit answer Button
+
+        startNewGame();
+
     }
+
+    // TODO 3-F: displayQuestion(Question question) {...}
+
+    // TODO 3-C: displayQuestionsRemaining(int questionRemaining) {...}
+
+    // TODO 4-A: onAnswerSelected(int answerSelected) {...}
+
+
 
     // TODO #1: add integer member variables here
 
@@ -88,8 +121,6 @@ public Question getCurrentQuestion(){
 }
 
     // TODO #6 add onAnswerSubmission() here
-
-    // TODO #6 add onAnswerSubmission() here
     public void onAnswerSubmission(){
         if (getCurrentQuestion().isCorrect()){
             totalCorrect ++;
@@ -98,9 +129,11 @@ public Question getCurrentQuestion(){
             System.out.println("Sorry the correct answer was" + getCurrentQuestion().correctAnswer);
         }
         questions.remove(getCurrentQuestion());
+        // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
         // displayQuestionsRemaining(questions.size());
         if (questions.size() == 0) {
             System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
+            // TODO 5-D: Show a popup instead
             startNewGame();
         } else {
             chooseNewQuestion();
