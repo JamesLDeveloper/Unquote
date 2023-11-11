@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 ImageView questionImageView;
 TextView questionTextView;
 TextView questionsRemainingTextView;
+TextView questionsRemainingCountTextView;
 Button answer0Button;
 Button answer1Button;
 Button answer2Button;
@@ -78,6 +79,7 @@ Button submitButton;
         questionImageView = findViewById(R.id.iv_main_question_image);
         questionTextView = findViewById(R.id.tv_main_question_title);
         questionsRemainingTextView = findViewById(R.id.tv_main_questions_remaining);
+        questionsRemainingCountTextView = findViewById(R.id.tv_main_questions_remaining_count);
         answer0Button = findViewById(R.id.btn_main_answer_0);
         answer1Button = findViewById(R.id.btn_main_answer_1);
         answer2Button = findViewById(R.id.btn_main_answer_2);
@@ -98,8 +100,10 @@ Button submitButton;
 
     // TODO 3-C: displayQuestionsRemaining(int questionRemaining) {...}
 
-    public void displayQuestionsRemaining(int q){
+    public void displayQuestionsRemaining(int questionsRemaining){
+//questionsRemainingTextView.setText(questionsRemaining);
 
+questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
     }
 
@@ -141,6 +145,16 @@ Button submitButton;
 // displayQuestion(firstQuestion);
 // displayQuestionsRemaining(questions.size());
 
+        // TODO 3-D.ii: Uncomment the line below after implementing displayQuestionsRemaining(int)
+         displayQuestionsRemaining(questions.size());
+
+        // TODO 3-H.ii: Uncomment after implementing displayQuestion(Question)
+        // displayQuestion(firstQuestion);
+
+
+
+
+
     }
 
     // TODO #4 add chooseNewQuestion() here
@@ -169,7 +183,7 @@ public Question getCurrentQuestion(){
         }
         questions.remove(getCurrentQuestion());
         // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
-        // displayQuestionsRemaining(questions.size());
+         displayQuestionsRemaining(questions.size());
         if (questions.size() == 0) {
             System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
             // TODO 5-D: Show a popup instead
