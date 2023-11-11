@@ -86,8 +86,6 @@ Button submitButton;
         answer3Button = findViewById(R.id.btn_main_answer_3);
         submitButton = findViewById(R.id.btn_main_submit_answer);
 
-
-
         // TODO 4-E: set onClickListener for each answer Button
 
         // TODO 5-A: set onClickListener for the submit answer Button
@@ -97,6 +95,15 @@ Button submitButton;
     }
 
     // TODO 3-F: displayQuestion(Question question) {...}
+
+    public void displayQuestion(Question question) {
+questionImageView.setImageResource(question.imageId);
+questionTextView.setText(question.questionText);
+answer0Button.setText(question.answer0);
+answer1Button.setText(question.answer1);
+answer2Button.setText(question.answer2);
+answer3Button.setText(question.answer3);
+    }
 
     // TODO 3-C: displayQuestionsRemaining(int questionRemaining) {...}
 
@@ -149,7 +156,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
          displayQuestionsRemaining(questions.size());
 
         // TODO 3-H.ii: Uncomment after implementing displayQuestion(Question)
-        // displayQuestion(firstQuestion);
+         displayQuestion(firstQuestion);
 
 
 
@@ -191,7 +198,7 @@ public Question getCurrentQuestion(){
         } else {
             chooseNewQuestion();
             // TODO: uncomment after implementing displayQuestion()
-// displayQuestion(getCurrentQuestion());
+ displayQuestion(getCurrentQuestion());
         }
 
     }
