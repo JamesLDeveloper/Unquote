@@ -152,12 +152,24 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
        currentQuestion.playerAnswer = answerSelection;
        if (answerSelection == 0) {
            answer0Button.setText("✔ " + currentQuestion.answer0);
+           answer1Button.setText(currentQuestion.answer1);
+           answer2Button.setText(currentQuestion.answer2);
+           answer3Button.setText(currentQuestion.answer3);
        }    else if (answerSelection == 1) {
                answer1Button.setText("✔ " + currentQuestion.answer1);
+               answer0Button.setText(currentQuestion.answer0);
+           answer2Button.setText(currentQuestion.answer2);
+           answer3Button.setText(currentQuestion.answer3);
             } else if (answerSelection == 2) {
                 answer2Button.setText("✔ " + currentQuestion.answer2);
+           answer0Button.setText(currentQuestion.answer0);
+           answer1Button.setText(currentQuestion.answer1);
+           answer3Button.setText(currentQuestion.answer3);
             } else {
                answer3Button.setText("✔ " + currentQuestion.answer3);
+           answer0Button.setText(currentQuestion.answer0);
+           answer1Button.setText(currentQuestion.answer1);
+           answer2Button.setText(currentQuestion.answer2);
             }
         }
 
