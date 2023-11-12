@@ -121,6 +121,14 @@ Button submitButton;
 
         // TODO 5-A: set onClickListener for the submit answer Button
 
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAnswerSubmission();
+            }
+        });
+
+
         startNewGame();
 
     }
@@ -223,7 +231,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
     // TODO #4 add chooseNewQuestion() here
 
     public Question chooseNewQuestion(){
-int randomNumber = generateRandomNumber(totalQuestions-1);
+int randomNumber = generateRandomNumber(questions.size());
         currentQuestionIndex = randomNumber;
 return questions.get(currentQuestionIndex);
 
@@ -242,7 +250,7 @@ public Question getCurrentQuestion(){
             totalCorrect ++;
             System.out.println("That's correct");
         } else {
-            System.out.println("Sorry the correct answer was" + getCurrentQuestion().correctAnswer);
+            System.out.println("Sorry the correct answer was " + getCurrentQuestion().correctAnswer);
         }
         questions.remove(getCurrentQuestion());
         // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
