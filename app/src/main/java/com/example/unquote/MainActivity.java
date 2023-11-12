@@ -1,12 +1,12 @@
 package com.example.unquote;
 
+import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -249,16 +249,75 @@ public Question getCurrentQuestion(){
         if (getCurrentQuestion().isCorrect()){
             totalCorrect ++;
             System.out.println("That's correct");
+
+            AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+            correctAnswerDialogueBuilder.setCancelable(true);
+            correctAnswerDialogueBuilder.setTitle("Correct?");
+            correctAnswerDialogueBuilder.setMessage("That's right!");
+            correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            correctAnswerDialogueBuilder.create().show();
+
+
+
         } else {
             System.out.println("Sorry the correct answer was " + getCurrentQuestion().correctAnswer);
+
+            String correctAnswerDisplay;
+
+            switch (getCurrentQuestion().correctAnswer){
+                case 0: correctAnswerDisplay = getCurrentQuestion().answer0;
+                break;
+                case 1: correctAnswerDisplay = getCurrentQuestion().answer1;
+                break;
+                case 2: correctAnswerDisplay = getCurrentQuestion().answer2;
+                break;
+                case 3: correctAnswerDisplay = getCurrentQuestion().answer3;
+                break;
+                default: correctAnswerDisplay = "One of the four you could have chosen, except the one you did ;)";
+            }
+
+
+
+            AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+            incorrectAnswerDialogueBuilder.setCancelable(true);
+            incorrectAnswerDialogueBuilder.setTitle("Correct?");
+            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was " + getCurrentQuestion().correctAnswer);
+            incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            incorrectAnswerDialogueBuilder.create().show();
+
+
+
         }
         questions.remove(getCurrentQuestion());
         // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
          displayQuestionsRemaining(questions.size());
         if (questions.size() == 0) {
             System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
+
             // TODO 5-D: Show a popup instead
-            startNewGame();
+            AlertDialog.Builder gameOverDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+            gameOverDialogueBuilder.setCancelable(false);
+            gameOverDialogueBuilder.setTitle("Game Over");
+            gameOverDialogueBuilder.setMessage(getGameOverMessage(totalCorrect, totalQuestions));
+            gameOverDialogueBuilder.setPositiveButton("Play Again!", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startNewGame();
+                }
+            });
+            gameOverDialogueBuilder.create().show();
+
+           // startNewGame();
         } else {
             chooseNewQuestion();
             // TODO: uncomment after implementing displayQuestion()
@@ -278,7 +337,7 @@ public String getGameOverMessage(int totalCorrect, int totalQuestions) {
     if (totalCorrect == totalQuestions) {
         return "You got all " + (totalQuestions) + " right! You won!";
     } else {
-        return "You got " + totalCorrect + "correct out of " + totalQuestions + ". Better luck next time!";
+        return "You got " + totalCorrect + " correct out of " + totalQuestions + ". Better luck next time!";
     }
 }
 
