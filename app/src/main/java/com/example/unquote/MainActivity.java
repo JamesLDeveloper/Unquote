@@ -286,7 +286,7 @@ public Question getCurrentQuestion(){
             AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
             incorrectAnswerDialogueBuilder.setCancelable(true);
             incorrectAnswerDialogueBuilder.setTitle("Correct?");
-            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was " + getCurrentQuestion().correctAnswer);
+            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was " + correctAnswerDisplay);
             incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
