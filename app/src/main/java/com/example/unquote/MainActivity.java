@@ -89,6 +89,36 @@ Button submitButton;
 
         // TODO 4-E: set onClickListener for each answer Button
 
+        answer0Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAnswerSelected(0);
+            }
+        });
+
+        answer1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAnswerSelected(1);
+            }
+        });
+
+        answer2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAnswerSelected(2);
+            }
+        });
+
+        answer3Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAnswerSelected(3);
+            }
+        });
+
+
+
         // TODO 5-A: set onClickListener for the submit answer Button
 
         startNewGame();
@@ -117,6 +147,20 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
     // TODO 4-A: onAnswerSelected(int answerSelected) {...}
 
+    public void onAnswerSelected(int answerSelection){
+       Question currentQuestion = getCurrentQuestion();
+       currentQuestion.playerAnswer = answerSelection;
+       if (answerSelection == 0) {
+           answer0Button.setText("✔ " + currentQuestion.answer0);
+       }    else if (answerSelection == 1) {
+               answer1Button.setText("✔ " + currentQuestion.answer1);
+            } else if (answerSelection == 2) {
+                answer2Button.setText("✔ " + currentQuestion.answer2);
+            } else {
+               answer3Button.setText("✔ " + currentQuestion.answer3);
+            }
+        }
+
 
 
     // TODO #1: add integer member variables here
@@ -130,7 +174,6 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
         // TODO 2-H: Provide actual drawables for each of these questions!
         questions = new ArrayList<>();
-
 
         Question question0 = new Question(R.drawable.img_quote_0, "Pretty good advice, and perhaps a scientist did say it… Who actually did?", "Albert Einstein", "Isaac Newton", "Rita Mae Brown", "Rosalind Franklin", 2);
         Question question1 = new Question(R.drawable.img_quote_1, "Was honest Abe honestly quoted? Who authored this pithy bit of wisdom?", "Edward Stieglitz", "Maya Angelou", "Abraham Lincoln", "Ralph Waldo Emerson", 0);
