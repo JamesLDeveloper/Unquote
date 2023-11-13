@@ -45,6 +45,8 @@ Button answer2Button;
 Button answer3Button;
 Button submitButton;
 
+Boolean validAnswer;
+
 
 //    private ActivityMainBinding binding;
     @Override
@@ -86,6 +88,7 @@ Button submitButton;
         answer2Button = findViewById(R.id.btn_main_answer_2);
         answer3Button = findViewById(R.id.btn_main_answer_3);
         submitButton = findViewById(R.id.btn_main_submit_answer);
+        validAnswer = false;
 
         // TODO 4-E: set onClickListener for each answer Button
 
@@ -118,13 +121,16 @@ Button submitButton;
         });
 
 
-
         // TODO 5-A: set onClickListener for the submit answer Button
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAnswerSubmission();
+
+                if (validAnswer == false)       {
+                }
+                else {
+                onAnswerSubmission();}
             }
         });
 
@@ -163,22 +169,28 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
            answer1Button.setText(currentQuestion.answer1);
            answer2Button.setText(currentQuestion.answer2);
            answer3Button.setText(currentQuestion.answer3);
+           validAnswer = true;
        }    else if (answerSelection == 1) {
                answer1Button.setText("✔ " + currentQuestion.answer1);
                answer0Button.setText(currentQuestion.answer0);
            answer2Button.setText(currentQuestion.answer2);
            answer3Button.setText(currentQuestion.answer3);
+           validAnswer = true;
             } else if (answerSelection == 2) {
                 answer2Button.setText("✔ " + currentQuestion.answer2);
            answer0Button.setText(currentQuestion.answer0);
            answer1Button.setText(currentQuestion.answer1);
            answer3Button.setText(currentQuestion.answer3);
-            } else {
+           validAnswer = true;
+            } else if (answerSelection == 3) {
                answer3Button.setText("✔ " + currentQuestion.answer3);
            answer0Button.setText(currentQuestion.answer0);
            answer1Button.setText(currentQuestion.answer1);
            answer2Button.setText(currentQuestion.answer2);
-            }
+           validAnswer = true;
+            } else {
+           validAnswer = false;
+        }
         }
 
 
@@ -233,6 +245,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
     public Question chooseNewQuestion(){
 int randomNumber = generateRandomNumber(questions.size());
         currentQuestionIndex = randomNumber;
+        validAnswer = false;
 return questions.get(currentQuestionIndex);
 
     }
