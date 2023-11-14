@@ -1,7 +1,6 @@
 package com.example.unquote;
 
 import android.app.AlertDialog;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -9,11 +8,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import java.util.ArrayList;
