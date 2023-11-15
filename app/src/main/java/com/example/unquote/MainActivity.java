@@ -2,12 +2,14 @@ package com.example.unquote;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import androidx.core.widget.TextViewCompat;
 
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -77,14 +79,36 @@ Boolean validAnswer;
 
         // TODO 3-B: assign View member variables
 
+        int autoSizeMinTextSize = 9;
+        int autoSizeMaxTextSize = 30;
+        int autoSizeStepGranularity = 2;
+        int unit = TypedValue.COMPLEX_UNIT_SP;
+
+
         questionImageView = findViewById(R.id.iv_main_question_image);
         questionTextView = findViewById(R.id.tv_main_question_title);
         questionsRemainingTextView = findViewById(R.id.tv_main_questions_remaining);
         questionsRemainingCountTextView = findViewById(R.id.tv_main_questions_remaining_count);
         answer0Button = findViewById(R.id.btn_main_answer_0);
+
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                answer0Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
         answer1Button = findViewById(R.id.btn_main_answer_1);
+
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                answer1Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
         answer2Button = findViewById(R.id.btn_main_answer_2);
+
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                answer2Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
         answer3Button = findViewById(R.id.btn_main_answer_3);
+
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                answer3Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
         submitButton = findViewById(R.id.btn_main_submit_answer);
         validAnswer = false;
 
