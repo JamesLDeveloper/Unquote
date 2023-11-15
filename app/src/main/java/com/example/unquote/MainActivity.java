@@ -242,7 +242,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
         chooseQuestionSet();
         totalQuestions = questions.size();
-
+        questionsRemainingTextView.setText("Questions Remaining");
 
 
 
@@ -287,7 +287,7 @@ public Question getCurrentQuestion(){
 
             AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
             correctAnswerDialogueBuilder.setCancelable(true);
-            correctAnswerDialogueBuilder.setTitle("Correct?");
+            correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
             correctAnswerDialogueBuilder.setMessage("That's right!");
             correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 @Override
@@ -300,7 +300,7 @@ public Question getCurrentQuestion(){
 
 
         } else {
-            System.out.println("Sorry the correct answer was " + getCurrentQuestion().correctAnswer);
+            System.out.println("Sorry the correct answer was: " + getCurrentQuestion().correctAnswer);
 
             String correctAnswerDisplay;
 
@@ -320,8 +320,8 @@ public Question getCurrentQuestion(){
 
             AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
             incorrectAnswerDialogueBuilder.setCancelable(true);
-            incorrectAnswerDialogueBuilder.setTitle("Correct?");
-            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was " + correctAnswerDisplay);
+            incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
             incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -338,6 +338,7 @@ public Question getCurrentQuestion(){
          displayQuestionsRemaining(questions.size());
         if (questions.size() == 0) {
         //    System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
+            questionsRemainingTextView.setText("Question Remaining");
 
             // TODO 5-D: Show a popup instead
             AlertDialog.Builder gameOverDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -357,6 +358,11 @@ public Question getCurrentQuestion(){
             chooseNewQuestion();
             // TODO: uncomment after implementing displayQuestion()
  displayQuestion(getCurrentQuestion());
+
+ if (questions.size() == 1) {
+     questionsRemainingTextView.setText("Question Remaining");
+            }
+
         }
 
     }
