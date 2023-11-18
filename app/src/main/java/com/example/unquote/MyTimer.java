@@ -28,6 +28,7 @@ this.timerCallback = timerCallback;
 @Override
 public void onFinish(){
         timerCallback.onTimerFinish();
+        timerCallback.onTimerTick(0);
   //      updateUITimer(0);
 }
 

@@ -85,7 +85,7 @@ Boolean correctAnswer = false;
         NavigationUI.setupWithNavController(binding.navView, navController);
         */
 
-        countDownTimer = new MyTimer(10000, 1000, this);
+        countDownTimer = new MyTimer(20000, 1000, this);
         countDownTimer.setInterval(1000);
 
         // TODO 3-B: assign View member variables
@@ -183,8 +183,19 @@ Boolean correctAnswer = false;
 
     @Override
     public void onTimerFinish(){
-
+validAnswer = true;
+if (questions.size() > 0) {
+    onAnswerSubmission();
+}
     }
+
+//    @Override
+//    public void onTimerFinishWithValidAnswer() {
+//        validAnswer = true;
+//        if (questions.size() > 0) {
+//            onAnswerSubmission();
+//        }
+//    }
 
 
 //    private void updateUITimer(long millisUntilFinished) {
