@@ -23,7 +23,9 @@ import java.util.ArrayList;
 
 //import com.example.unquote.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
+
+
 
     int currentQuestionIndex;
     int totalCorrect;
@@ -46,6 +48,10 @@ Button answer3Button;
 Button submitButton;
 
 Boolean validAnswer;
+
+Boolean correctAnswer = false;
+
+    String correctAnswerDisplay;
 
 
 //    private ActivityMainBinding binding;
@@ -247,6 +253,8 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
         Question question10 = new Question(R.drawable.img_quote_10, "He’s the king of something alright — to whom does this self-titling line belong to?", "Tony Montana, Scarface", "Joker, The Dark Knight", "Lex Luthor, Batman Vs Superman", "Jack, Titanic", 3);
         Question question11 = new Question(R.drawable.img_quote_11, "Is “Grey” synonymous for “wise”? If so, maybe Gandalf did preach this advice. If not, who did?", "Yoda, Star Wars", "Gandalf the Grey, Lord of the Rings", "Dumbledore, Harry Potter", "Uncle Ben, Spider-Man", 0);
         Question question12 = new Question(R.drawable.img_quote_12, "Houston, we have a problem with this quote — which space-traveler does this catch-phrase actually belong to?", "Han Solo, Star Wars", "Captain Kirk, Star Trek", "Buzz Lightyear, Toy Story", "Jim Lovell, Apollo 13", 2);
+        Question question13 = new Question(R.drawable.img_quote_0, "Who said To Be or Not To Be, that is the question, you muppet, I can't believe how long this question is, I wonder if the text size will shrink.", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1);
+
 
         questions.add(question0);
         questions.add(question1);
@@ -261,6 +269,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
         questions.add(question10);
         questions.add(question11);
         questions.add(question12);
+//        questions.add(question13);
 
         totalCorrect = 0;
 
@@ -303,13 +312,93 @@ public Question getCurrentQuestion(){
        return currentQuestion;
 }
 
-    // TODO #6 add onAnswerSubmission() here
-    public void onAnswerSubmission(){
-        if (getCurrentQuestion().isCorrect()){
-            totalCorrect ++;
-            System.out.println("That's correct");
 
-            AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+//public boolean correctAnswerGivenDialogueBox(){
+//
+//    AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+//    correctAnswerDialogueBuilder.setCancelable(true);
+//    correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+//    correctAnswerDialogueBuilder.setMessage("That's right!");
+//    correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//
+//        }
+//    });
+//    correctAnswerDialogueBuilder.create().show();
+//
+//    return true;
+//}
+
+
+
+
+    // TODO #6 add onAnswerSubmission() here
+    public void onAnswerSubmission() {
+        if (getCurrentQuestion().isCorrect()) {
+            totalCorrect++;
+            System.out.println("That's correct");
+            correctAnswer = true;
+
+//            AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+//            correctAnswerDialogueBuilder.setCancelable(true);
+//            correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+//            correctAnswerDialogueBuilder.setMessage("That's right!");
+//            correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                }
+//            });
+//            correctAnswerDialogueBuilder.create().show();
+
+        } else {
+            System.out.println("Sorry the correct answer was: " + getCurrentQuestion().correctAnswer);
+
+            switch (getCurrentQuestion().correctAnswer) {
+                case 0:
+                    correctAnswerDisplay = getCurrentQuestion().answer0;
+                    break;
+                case 1:
+                    correctAnswerDisplay = getCurrentQuestion().answer1;
+                    break;
+                case 2:
+                    correctAnswerDisplay = getCurrentQuestion().answer2;
+                    break;
+                case 3:
+                    correctAnswerDisplay = getCurrentQuestion().answer3;
+                    break;
+                default:
+                    correctAnswerDisplay = "One of the four you could have chosen, except the one you did ;)";
+            }
+
+            correctAnswer = false;
+
+        }
+
+            questions.remove(getCurrentQuestion());
+            // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
+            displayQuestionsRemaining(questions.size());
+            if (questions.size() == 0) {
+                //    System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
+                questionsRemainingTextView.setText("Questions Remaining");
+
+                // TODO 5-D: Show a popup instead
+                AlertDialog.Builder gameOverDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+                gameOverDialogueBuilder.setCancelable(false);
+                gameOverDialogueBuilder.setTitle("Game Over");
+                gameOverDialogueBuilder.setMessage(getGameOverMessage(totalCorrect, totalQuestions));
+                gameOverDialogueBuilder.setPositiveButton("Play Again!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startNewGame();
+                    }
+                });
+                gameOverDialogueBuilder.create().show();
+
+                if (correctAnswer == true) {
+
+                                AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
             correctAnswerDialogueBuilder.setCancelable(true);
             correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
             correctAnswerDialogueBuilder.setMessage("That's right!");
@@ -322,74 +411,75 @@ public Question getCurrentQuestion(){
             correctAnswerDialogueBuilder.create().show();
 
 
+                } else {
 
-        } else {
-            System.out.println("Sorry the correct answer was: " + getCurrentQuestion().correctAnswer);
+                    AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+                    incorrectAnswerDialogueBuilder.setCancelable(true);
+                    incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+                    incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
+                    incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-            String correctAnswerDisplay;
-
-            switch (getCurrentQuestion().correctAnswer){
-                case 0: correctAnswerDisplay = getCurrentQuestion().answer0;
-                break;
-                case 1: correctAnswerDisplay = getCurrentQuestion().answer1;
-                break;
-                case 2: correctAnswerDisplay = getCurrentQuestion().answer2;
-                break;
-                case 3: correctAnswerDisplay = getCurrentQuestion().answer3;
-                break;
-                default: correctAnswerDisplay = "One of the four you could have chosen, except the one you did ;)";
-            }
-
-
-
-            AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-            incorrectAnswerDialogueBuilder.setCancelable(true);
-            incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
-            incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    incorrectAnswerDialogueBuilder.create().show();
 
                 }
-            });
-            incorrectAnswerDialogueBuilder.create().show();
 
 
 
-        }
-        questions.remove(getCurrentQuestion());
-        // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
-         displayQuestionsRemaining(questions.size());
-        if (questions.size() == 0) {
-        //    System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
-            questionsRemainingTextView.setText("Question Remaining");
+                // startNewGame();
+            } else {
 
-            // TODO 5-D: Show a popup instead
-            AlertDialog.Builder gameOverDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-            gameOverDialogueBuilder.setCancelable(false);
-            gameOverDialogueBuilder.setTitle("Game Over");
-            gameOverDialogueBuilder.setMessage(getGameOverMessage(totalCorrect, totalQuestions));
-            gameOverDialogueBuilder.setPositiveButton("Play Again!", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    startNewGame();
+                if (correctAnswer == true) {
+
+                    AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+                    correctAnswerDialogueBuilder.setCancelable(true);
+                    correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+                    correctAnswerDialogueBuilder.setMessage("That's right!");
+                    correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    correctAnswerDialogueBuilder.create().show();
+
+
+                } else {
+
+                    AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+                    incorrectAnswerDialogueBuilder.setCancelable(true);
+                    incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+                    incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
+                    incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    incorrectAnswerDialogueBuilder.create().show();
+
                 }
-            });
-            gameOverDialogueBuilder.create().show();
 
-           // startNewGame();
-        } else {
-            chooseNewQuestion();
-            // TODO: uncomment after implementing displayQuestion()
- displayQuestion(getCurrentQuestion());
+                chooseNewQuestion();
+                // TODO: uncomment after implementing displayQuestion()
+                displayQuestion(getCurrentQuestion());
 
- if (questions.size() == 1) {
-     questionsRemainingTextView.setText("Question Remaining");
+                if (questions.size() == 1) {
+                    questionsRemainingTextView.setText("Question Remaining");
+                }
+
             }
 
         }
 
-    }
+
+
+
+
+
 
     public int generateRandomNumber(int max){
         double randomNumber = Math.random();

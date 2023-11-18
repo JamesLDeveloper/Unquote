@@ -1,8 +1,14 @@
 package com.example.unquote;
 
 public class Main {
+
+    public void run() {
+        System.out.println("This code is running in a thread");
+    }
+
     public static void main(String[] args) {
         MainActivity mainActivity = new MainActivity();
+
         mainActivity.startNewGame();
         System.out.println("Questions remaining: " + mainActivity.totalQuestions);
         Question currentQuestion = mainActivity.getCurrentQuestion();
