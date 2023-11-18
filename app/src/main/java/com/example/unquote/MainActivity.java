@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 //import androidx.navigation.NavController;
 //import androidx.navigation.Navigation;
 //import androidx.navigation.ui.AppBarConfiguration;
@@ -23,9 +24,9 @@ import java.util.ArrayList;
 
 //import com.example.unquote.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements MyTimer.TimerCallback  {
 
-
+private MyTimer countDownTimer;
 
     int currentQuestionIndex;
     int totalCorrect;
@@ -41,6 +42,8 @@ ImageView questionImageView;
 TextView questionTextView;
 TextView questionsRemainingTextView;
 TextView questionsRemainingCountTextView;
+
+TextView countDownTimerRemaining;
 Button answer0Button;
 Button answer1Button;
 Button answer2Button;
@@ -82,6 +85,7 @@ Boolean correctAnswer = false;
         NavigationUI.setupWithNavController(binding.navView, navController);
         */
 
+        countDownTimer = new MyTimer(10000, 1000, this);
 
         // TODO 3-B: assign View member variables
 
@@ -96,6 +100,7 @@ Boolean correctAnswer = false;
         questionsRemainingTextView = findViewById(R.id.tv_main_questions_remaining);
         questionsRemainingCountTextView = findViewById(R.id.tv_main_questions_remaining_count);
         answer0Button = findViewById(R.id.btn_main_answer_0);
+        countDownTimerRemaining = findViewById(R.id.tv_time_remaining_countdown);
 
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
                 answer0Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
@@ -164,6 +169,18 @@ Boolean correctAnswer = false;
 
 
         startNewGame();
+
+    }
+
+    @Override
+    public void onTimerTick(){
+        updateUITimer();
+    }
+
+    private void updateUITimer() {
+        long timeLeftInMillis = countDownTimer.getInterval();
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(timeLeftInMillis);
+        countDownTimerRemaining.setText(String.valueOf(seconds));
 
     }
 
@@ -299,6 +316,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
     public Question chooseNewQuestion(){
 int randomNumber = generateRandomNumber(questions.size());
+        countDownTimer.startTimer();
         currentQuestionIndex = randomNumber;
         validAnswer = false;
 return questions.get(currentQuestionIndex);

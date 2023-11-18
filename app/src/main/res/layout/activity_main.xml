@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -143,7 +144,7 @@
                 android:id="@+id/tv_main_questions_remaining"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="35"
                 android:autoSizeTextType="uniform"
                 android:maxLines="2"
                 android:paddingLeft="8dp"
@@ -152,9 +153,25 @@
                 android:textAlignment="textStart"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_main_submit_answer"
+                app:layout_constraintEnd_toStartOf="@+id/pulseCountDown"
                 app:layout_constraintStart_toEndOf="@+id/tv_main_questions_remaining_count"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_time_remaining_countdown"
+                android:layout_weight="15"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:text="10"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_main_submit_answer"
+                app:layout_constraintStart_toEndOf="@+id/tv_main_questions_remaining"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <Button
                 android:id="@+id/btn_main_submit_answer"
