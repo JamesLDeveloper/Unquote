@@ -86,6 +86,7 @@ Boolean correctAnswer = false;
         */
 
         countDownTimer = new MyTimer(10000, 1000, this);
+        countDownTimer.setInterval(1000);
 
         // TODO 3-B: assign View member variables
 
@@ -173,20 +174,30 @@ Boolean correctAnswer = false;
     }
 
     @Override
-    public void onTimerTick(){
-        updateUITimer();
+    public void onTimerTick(long millisUntilFinished){
+   //     long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+   //     countDownTimerRemaining.setText(String.valueOf(seconds));
+   //     updateUITimer(millisUntilFinished);
+        countDownTimerRemaining.setText(String.valueOf(millisUntilFinished/1000));
     }
 
-    private void updateUITimer() {
-        long timeLeftInMillis = countDownTimer.getInterval();
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(timeLeftInMillis);
-        countDownTimerRemaining.setText(String.valueOf(seconds));
+    @Override
+    public void onTimerFinish(){
 
     }
+
+
+//    private void updateUITimer(long millisUntilFinished) {
+//      //  long timeLeftInMillis = countDownTimer.getInterval();
+////        long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+//        countDownTimerRemaining.setText(String.valueOf(millisUntilFinished / 1000));
+//
+//    }
 
     // TODO 3-F: displayQuestion(Question question) {...}
 
     public void displayQuestion(Question question) {
+        countDownTimer.startTimer();
 questionImageView.setImageResource(question.imageId);
 questionTextView.setText(question.questionText);
 answer0Button.setText(question.answer0);
@@ -316,7 +327,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
     public Question chooseNewQuestion(){
 int randomNumber = generateRandomNumber(questions.size());
-        countDownTimer.startTimer();
+
         currentQuestionIndex = randomNumber;
         validAnswer = false;
 return questions.get(currentQuestionIndex);
@@ -395,6 +406,7 @@ public Question getCurrentQuestion(){
         }
 
             questions.remove(getCurrentQuestion());
+
             // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
             displayQuestionsRemaining(questions.size());
             if (questions.size() == 0) {
@@ -480,7 +492,7 @@ public Question getCurrentQuestion(){
                     incorrectAnswerDialogueBuilder.create().show();
 
                 }
-
+              //  countDownTimer.startTimer();
                 chooseNewQuestion();
                 // TODO: uncomment after implementing displayQuestion()
                 displayQuestion(getCurrentQuestion());

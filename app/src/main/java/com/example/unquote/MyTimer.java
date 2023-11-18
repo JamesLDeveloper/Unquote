@@ -1,35 +1,53 @@
 package com.example.unquote;
 
-import android.os.Handler;
+import android.os.CountDownTimer;
+//import android.os.Handler;
 
-public class MyTimer {
+public class MyTimer extends CountDownTimer {
 
-    private Handler handler;
+ //   private Handler handler;
     private boolean paused;
     private int interval;
-    private Runnable task;
+
+    private long endTime;
 
     private TimerCallback timerCallback;
 
-    public MyTimer(int startDelay, int interval, TimerCallback timerCallback) {
-        this.interval = interval;
-        this.timerCallback = timerCallback;
-        this.handler = new Handler();
-        this.task = new Runnable() {
-            @Override
-            public void run() {
-                if (!paused) {
-                    timerCallback.onTimerTick();
-                    handler.postDelayed(this, interval);
-                }
-            }
-        };
-
-        handler.postDelayed(task, startDelay);
+    public MyTimer(long millisInFuture, long countDownInterval, TimerCallback timerCallback) {
+super(millisInFuture, countDownInterval);
+this.timerCallback = timerCallback;
+//this.handler = new Handler();
 
     }
 
-    public int getInterval(){
+    @Override
+    public void onTick(long millisUntilFinished) {
+        timerCallback.onTimerTick(millisUntilFinished);
+    }
+
+@Override
+public void onFinish(){
+        timerCallback.onTimerFinish();
+  //      updateUITimer(0);
+}
+
+//    private Runnable task = new Runnable() {
+//        @Override
+//        public void run() {
+//            if (!paused) {
+//                timerCallback.onTimerTick(calculateTimeLeft());
+//                handler.postDelayed(this, interval);
+//            }
+//        }
+//    };
+
+    public interface TimerCallback {
+        void onTimerTick(long millisUntilFinished);
+        void onTimerFinish();
+    }
+
+
+    public int getInterval() {
         return this.interval;
     }
 
@@ -39,14 +57,20 @@ public class MyTimer {
 
     public void startTimer() {
         paused = false;
-        handler.postDelayed(task, interval);
+//        handler.postDelayed(task, interval);
+        start();
     }
 
     public void stopTimer() {
         paused = true;
     }
 
-    public interface TimerCallback {
-        void onTimerTick();
+    private long calculateTimeLeft() {
+        return Math.max(0, endTime - System.currentTimeMillis());
     }
+
+
+
+
+
 }
