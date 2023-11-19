@@ -57,13 +57,14 @@ public void onFinish(){
     }
 
     public void startTimer() {
-        paused = false;
+//        paused = false;
 //        handler.postDelayed(task, interval);
         start();
     }
 
     public void stopTimer() {
-        paused = true;
+ //       paused = true;
+        cancel();
     }
 
     private long calculateTimeLeft() {

@@ -24,9 +24,9 @@ import java.util.concurrent.TimeUnit;
 
 //import com.example.unquote.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements MyTimer.TimerCallback  {
+public class MainActivity extends AppCompatActivity implements MyTimer.TimerCallback {
 
-private MyTimer countDownTimer;
+    private MyTimer countDownTimer;
 
     int currentQuestionIndex;
     int totalCorrect;
@@ -38,26 +38,26 @@ private MyTimer countDownTimer;
 
     // TODO 3-A: Declare View member variables
 
-ImageView questionImageView;
-TextView questionTextView;
-TextView questionsRemainingTextView;
-TextView questionsRemainingCountTextView;
+    ImageView questionImageView;
+    TextView questionTextView;
+    TextView questionsRemainingTextView;
+    TextView questionsRemainingCountTextView;
 
-TextView countDownTimerRemaining;
-Button answer0Button;
-Button answer1Button;
-Button answer2Button;
-Button answer3Button;
-Button submitButton;
+    TextView countDownTimerRemaining;
+    Button answer0Button;
+    Button answer1Button;
+    Button answer2Button;
+    Button answer3Button;
+    Button submitButton;
 
-Boolean validAnswer;
+    Boolean validAnswer;
 
-Boolean correctAnswer = false;
+    Boolean correctAnswer = false;
 
     String correctAnswerDisplay;
 
 
-//    private ActivityMainBinding binding;
+    //    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,10 +161,12 @@ Boolean correctAnswer = false;
             @Override
             public void onClick(View v) {
 
-                if (validAnswer == false)       {
-                }
-                else {
-                onAnswerSubmission();}
+if (validAnswer) {
+    countDownTimer.stopTimer();
+    onAnswerSubmission();
+} else {
+
+}
             }
         });
 
@@ -174,19 +176,20 @@ Boolean correctAnswer = false;
     }
 
     @Override
-    public void onTimerTick(long millisUntilFinished){
-   //     long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-   //     countDownTimerRemaining.setText(String.valueOf(seconds));
-   //     updateUITimer(millisUntilFinished);
-        countDownTimerRemaining.setText(String.valueOf(millisUntilFinished/1000));
+    public void onTimerTick(long millisUntilFinished) {
+        //     long seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+        //     countDownTimerRemaining.setText(String.valueOf(seconds));
+        //     updateUITimer(millisUntilFinished);
+        countDownTimerRemaining.setText(String.valueOf(millisUntilFinished / 1000));
     }
 
     @Override
-    public void onTimerFinish(){
-validAnswer = true;
-if (questions.size() > 0) {
-    onAnswerSubmission();
-}
+    public void onTimerFinish() {
+
+        if (questions.size() > 0) {
+            validAnswer = true;
+            onAnswerSubmission();
+        }
     }
 
 //    @Override
@@ -209,64 +212,63 @@ if (questions.size() > 0) {
 
     public void displayQuestion(Question question) {
         countDownTimer.startTimer();
-questionImageView.setImageResource(question.imageId);
-questionTextView.setText(question.questionText);
-answer0Button.setText(question.answer0);
-answer1Button.setText(question.answer1);
-answer2Button.setText(question.answer2);
-answer3Button.setText(question.answer3);
+        questionImageView.setImageResource(question.imageId);
+        questionTextView.setText(question.questionText);
+        answer0Button.setText(question.answer0);
+        answer1Button.setText(question.answer1);
+        answer2Button.setText(question.answer2);
+        answer3Button.setText(question.answer3);
     }
 
     // TODO 3-C: displayQuestionsRemaining(int questionRemaining) {...}
 
-    public void displayQuestionsRemaining(int questionsRemaining){
+    public void displayQuestionsRemaining(int questionsRemaining) {
 //questionsRemainingTextView.setText(questionsRemaining);
 
-questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
+        questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
     }
 
     // TODO 4-A: onAnswerSelected(int answerSelected) {...}
 
-    public void onAnswerSelected(int answerSelection){
-       Question currentQuestion = getCurrentQuestion();
-       currentQuestion.playerAnswer = answerSelection;
-       if (answerSelection == 0) {
-           answer0Button.setText("✔ " + currentQuestion.answer0);
-           answer1Button.setText(currentQuestion.answer1);
-           answer2Button.setText(currentQuestion.answer2);
-           answer3Button.setText(currentQuestion.answer3);
-           validAnswer = true;
-       }    else if (answerSelection == 1) {
-               answer1Button.setText("✔ " + currentQuestion.answer1);
-               answer0Button.setText(currentQuestion.answer0);
-           answer2Button.setText(currentQuestion.answer2);
-           answer3Button.setText(currentQuestion.answer3);
-           validAnswer = true;
-            } else if (answerSelection == 2) {
-                answer2Button.setText("✔ " + currentQuestion.answer2);
-           answer0Button.setText(currentQuestion.answer0);
-           answer1Button.setText(currentQuestion.answer1);
-           answer3Button.setText(currentQuestion.answer3);
-           validAnswer = true;
-            } else if (answerSelection == 3) {
-               answer3Button.setText("✔ " + currentQuestion.answer3);
-           answer0Button.setText(currentQuestion.answer0);
-           answer1Button.setText(currentQuestion.answer1);
-           answer2Button.setText(currentQuestion.answer2);
-           validAnswer = true;
-            } else {
-           validAnswer = false;
+    public void onAnswerSelected(int answerSelection) {
+        Question currentQuestion = getCurrentQuestion();
+        currentQuestion.playerAnswer = answerSelection;
+        if (answerSelection == 0) {
+            answer0Button.setText("✔ " + currentQuestion.answer0);
+            answer1Button.setText(currentQuestion.answer1);
+            answer2Button.setText(currentQuestion.answer2);
+            answer3Button.setText(currentQuestion.answer3);
+            validAnswer = true;
+        } else if (answerSelection == 1) {
+            answer1Button.setText("✔ " + currentQuestion.answer1);
+            answer0Button.setText(currentQuestion.answer0);
+            answer2Button.setText(currentQuestion.answer2);
+            answer3Button.setText(currentQuestion.answer3);
+            validAnswer = true;
+        } else if (answerSelection == 2) {
+            answer2Button.setText("✔ " + currentQuestion.answer2);
+            answer0Button.setText(currentQuestion.answer0);
+            answer1Button.setText(currentQuestion.answer1);
+            answer3Button.setText(currentQuestion.answer3);
+            validAnswer = true;
+        } else if (answerSelection == 3) {
+            answer3Button.setText("✔ " + currentQuestion.answer3);
+            answer0Button.setText(currentQuestion.answer0);
+            answer1Button.setText(currentQuestion.answer1);
+            answer2Button.setText(currentQuestion.answer2);
+            validAnswer = true;
+        } else {
+            validAnswer = false;
         }
-        }
-
+    }
 
 
     // TODO #1: add integer member variables here
 
 
-    public void chooseQuestionSet(){
-        while (questions.size() > 6){
+    public void chooseQuestionSet() {
+        while (questions.size() > 6) {
             questions.remove(generateRandomNumber(questions.size()));
         }
     }
@@ -274,7 +276,7 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
 
     // TODO #3 add startNewGame() here
 
-    public void startNewGame(){
+    public void startNewGame() {
 
         // TODO 2-H: Provide actual drawables for each of these questions!
         questions = new ArrayList<>();
@@ -317,83 +319,77 @@ questionsRemainingCountTextView.setText(String.valueOf(questionsRemaining));
         questionsRemainingTextView.setText("Questions Remaining");
 
 
-
         Question firstQuestion = chooseNewQuestion();
 // displayQuestion(firstQuestion);
 // displayQuestionsRemaining(questions.size());
 
         // TODO 3-D.ii: Uncomment the line below after implementing displayQuestionsRemaining(int)
-         displayQuestionsRemaining(questions.size());
+        displayQuestionsRemaining(questions.size());
 
         // TODO 3-H.ii: Uncomment after implementing displayQuestion(Question)
-         displayQuestion(firstQuestion);
-
-
-
+        displayQuestion(firstQuestion);
 
 
     }
 
     // TODO #4 add chooseNewQuestion() here
 
-    public Question chooseNewQuestion(){
-int randomNumber = generateRandomNumber(questions.size());
+    public Question chooseNewQuestion() {
+        int randomNumber = generateRandomNumber(questions.size());
 
         currentQuestionIndex = randomNumber;
         validAnswer = false;
-return questions.get(currentQuestionIndex);
+        return questions.get(currentQuestionIndex);
 
     }
 
     // TODO #5 add getCurrentQuestion() here
 
-public Question getCurrentQuestion(){
-       Question currentQuestion = questions.get(currentQuestionIndex);
-       return currentQuestion;
-}
-
-
-//public boolean correctAnswerGivenDialogueBox(){
-//
-//    AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-//    correctAnswerDialogueBuilder.setCancelable(true);
-//    correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-//    correctAnswerDialogueBuilder.setMessage("That's right!");
-//    correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-//        @Override
-//        public void onClick(DialogInterface dialog, int which) {
-//
-//        }
-//    });
-//    correctAnswerDialogueBuilder.create().show();
-//
-//    return true;
-//}
-
-
+    public Question getCurrentQuestion() {
+        Question currentQuestion = questions.get(currentQuestionIndex);
+        return currentQuestion;
+    }
 
 
     // TODO #6 add onAnswerSubmission() here
     public void onAnswerSubmission() {
+        countDownTimer.stopTimer();
         if (getCurrentQuestion().isCorrect()) {
             totalCorrect++;
             System.out.println("That's correct");
             correctAnswer = true;
 
-//            AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-//            correctAnswerDialogueBuilder.setCancelable(true);
-//            correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-//            correctAnswerDialogueBuilder.setMessage("That's right!");
-//            correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//
-//                }
-//            });
-//            correctAnswerDialogueBuilder.create().show();
+
+            AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+            correctAnswerDialogueBuilder.setCancelable(true);
+            correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+            correctAnswerDialogueBuilder.setMessage("That's right!");
+            correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    questions.remove(getCurrentQuestion());
+
+                    if (questions.size() == 1) {
+                        questionsRemainingTextView.setText("Question Remaining");
+                    }
+
+                    if (questions.size() > 0){
+
+                    chooseNewQuestion();
+                    displayQuestionsRemaining(questions.size());
+                    // TODO: uncomment after implementing displayQuestion()
+                    displayQuestion(getCurrentQuestion());
+                    } else {
+                        gameOver();
+                    }
+                }
+            });
+            correctAnswerDialogueBuilder.create().show();
+
 
         } else {
-            System.out.println("Sorry the correct answer was: " + getCurrentQuestion().correctAnswer);
+ //           System.out.println("Sorry the correct answer was: " + getCurrentQuestion().correctAnswer);
 
             switch (getCurrentQuestion().correctAnswer) {
                 case 0:
@@ -414,127 +410,89 @@ public Question getCurrentQuestion(){
 
             correctAnswer = false;
 
-        }
-
-            questions.remove(getCurrentQuestion());
-
-            // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
-            displayQuestionsRemaining(questions.size());
-            if (questions.size() == 0) {
-                //    System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
-                questionsRemainingTextView.setText("Questions Remaining");
-
-                // TODO 5-D: Show a popup instead
-                AlertDialog.Builder gameOverDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-                gameOverDialogueBuilder.setCancelable(false);
-                gameOverDialogueBuilder.setTitle("Game Over");
-                gameOverDialogueBuilder.setMessage(getGameOverMessage(totalCorrect, totalQuestions));
-                gameOverDialogueBuilder.setPositiveButton("Play Again!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startNewGame();
-                    }
-                });
-                gameOverDialogueBuilder.create().show();
-
-                if (correctAnswer == true) {
-
-                                AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-            correctAnswerDialogueBuilder.setCancelable(true);
-            correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-            correctAnswerDialogueBuilder.setMessage("That's right!");
-            correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+//            countDownTimer.stopTimer();
+            AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+            incorrectAnswerDialogueBuilder.setCancelable(false);
+            incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+            incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
+            incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
+                    questions.remove(getCurrentQuestion());
+
+                    if (questions.size() == 1) {
+                        questionsRemainingTextView.setText("Question Remaining");
+                    }
+
+                    if (questions.size() > 0){
+
+                        chooseNewQuestion();
+                        displayQuestionsRemaining(questions.size());
+                        // TODO: uncomment after implementing displayQuestion()
+                        displayQuestion(getCurrentQuestion());
+                    } else {
+                        gameOver();
+                    }
+
+
                 }
             });
-            correctAnswerDialogueBuilder.create().show();
+//            countDownTimer.stopTimer();
+            incorrectAnswerDialogueBuilder.create().show();
 
 
-                } else {
+        }
 
-                    AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-                    incorrectAnswerDialogueBuilder.setCancelable(true);
-                    incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-                    incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
-                    incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    incorrectAnswerDialogueBuilder.create().show();
-
-                }
-
-
-
-                // startNewGame();
-            } else {
-
-                if (correctAnswer == true) {
-
-                    AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-                    correctAnswerDialogueBuilder.setCancelable(true);
-                    correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-                    correctAnswerDialogueBuilder.setMessage("That's right!");
-                    correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    correctAnswerDialogueBuilder.create().show();
-
-
-                } else {
-
-                    AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-                    incorrectAnswerDialogueBuilder.setCancelable(true);
-                    incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
-                    incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
-                    incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    incorrectAnswerDialogueBuilder.create().show();
-
-                }
-              //  countDownTimer.startTimer();
-                chooseNewQuestion();
-                // TODO: uncomment after implementing displayQuestion()
-                displayQuestion(getCurrentQuestion());
-
-                if (questions.size() == 1) {
-                    questionsRemainingTextView.setText("Question Remaining");
-                }
-
-            }
+        countDownTimer.stopTimer();
 
         }
 
 
 
 
+    public void gameOver() {
+        if (questions.size() == 0) {
+            //    System.out.println(getGameOverMessage(totalCorrect, totalQuestions));
+            questionsRemainingTextView.setText("Questions Remaining");
+            countDownTimer.stopTimer();
+            // TODO 5-D: Show a popup instead
+            AlertDialog.Builder gameOverDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+            gameOverDialogueBuilder.setCancelable(false);
+            gameOverDialogueBuilder.setTitle("Game Over");
+            gameOverDialogueBuilder.setMessage(getGameOverMessage(totalCorrect, totalQuestions));
+            gameOverDialogueBuilder.setPositiveButton("Play Again!", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startNewGame();
+                }
+            });
+            displayQuestionsRemaining(questions.size());
+            gameOverDialogueBuilder.create().show();
 
 
 
-    public int generateRandomNumber(int max){
-        double randomNumber = Math.random();
-        int randomIntNumber = (int)(randomNumber * max);
-        //System.out.println(randomIntNumber);
-        return randomIntNumber;
+        }
+
     }
 
-public String getGameOverMessage(int totalCorrect, int totalQuestions) {
-    if (totalCorrect == totalQuestions) {
-        return "You got all " + (totalQuestions) + " right! You won!";
-    } else {
-        return "You got " + totalCorrect + " correct out of " + totalQuestions + ". Better luck next time!";
-    }
-}
 
-}
+        public int generateRandomNumber ( int max){
+            double randomNumber = Math.random();
+            int randomIntNumber = (int) (randomNumber * max);
+            //System.out.println(randomIntNumber);
+            return randomIntNumber;
+        }
+
+        public String getGameOverMessage ( int totalCorrect, int totalQuestions){
+            if (totalCorrect == totalQuestions) {
+                return "You got all " + (totalQuestions) + " right! You won!";
+            } else {
+                return "You got " + totalCorrect + " correct out of " + totalQuestions + ". Better luck next time!";
+            }
+        }
+
+    }
+
+
+//The code above should pause the timer when onAnswerSubmission() is called but it doesnt. Any idea why?
