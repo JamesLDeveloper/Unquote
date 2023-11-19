@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
     TextView questionsRemainingTextView;
     TextView questionsRemainingCountTextView;
 
+    TextView timeRemainingTextView;
+
     TextView countDownTimerRemaining;
     Button answer0Button;
     Button answer1Button;
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
 
         // TODO 3-B: assign View member variables
 
-        int autoSizeMinTextSize = 9;
+        int autoSizeMinTextSize = 6;
         int autoSizeMaxTextSize = 30;
         int autoSizeStepGranularity = 2;
         int unit = TypedValue.COMPLEX_UNIT_SP;
@@ -98,30 +100,46 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
 
         questionImageView = findViewById(R.id.iv_main_question_image);
         questionTextView = findViewById(R.id.tv_main_question_title);
-        questionsRemainingTextView = findViewById(R.id.tv_main_questions_remaining);
+
+
+
         questionsRemainingCountTextView = findViewById(R.id.tv_main_questions_remaining_count);
-        answer0Button = findViewById(R.id.btn_main_answer_0);
+
         countDownTimerRemaining = findViewById(R.id.tv_time_remaining_countdown);
 
+
+
+        questionsRemainingTextView = findViewById(R.id.tv_main_questions_remaining);
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                questionsRemainingTextView, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
+        timeRemainingTextView = findViewById(R.id.tv_time_remaining_text);
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                timeRemainingTextView, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
+        answer0Button = findViewById(R.id.btn_main_answer_0);
+                TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
                 answer0Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
 
         answer1Button = findViewById(R.id.btn_main_answer_1);
-
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
                 answer1Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
 
         answer2Button = findViewById(R.id.btn_main_answer_2);
-
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
                 answer2Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
 
         answer3Button = findViewById(R.id.btn_main_answer_3);
-
         TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
                 answer3Button, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
 
         submitButton = findViewById(R.id.btn_main_submit_answer);
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                submitButton, autoSizeMinTextSize, autoSizeMaxTextSize, autoSizeStepGranularity, unit);
+
+
+
+
         validAnswer = false;
 
         // TODO 4-E: set onClickListener for each answer Button
