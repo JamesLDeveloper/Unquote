@@ -8,12 +8,18 @@ import androidx.core.widget.TextViewCompat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -75,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
 
         /*        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -87,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
         NavigationUI.setupWithNavController(binding.navView, navController);
         */
 
+
+/*        Button showDialogButton = findViewById(R.id.showDialogButton);
+        showDialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //showOptionsDialog();
+            }
+        }); */
+
         countDownTimer = new MyTimer(20000, 1000, this);
         countDownTimer.setInterval(1000);
 
@@ -94,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
 
         int autoSizeMinTextSize = 6;
         int autoSizeMaxTextSize = 30;
-        int autoSizeStepGranularity = 2;
+        int autoSizeStepGranularity = 1;
         int unit = TypedValue.COMPLEX_UNIT_SP;
 
 
@@ -286,10 +300,85 @@ if (validAnswer) {
 
 
     public void chooseQuestionSet() {
+
+        AlertDialog.Builder testDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        testDialogBuilder.setTitle("Test Dialog");
+        testDialogBuilder.setItems(new String[]{"Option 1", "Option 2"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("TestDialog", "Selected Option: " + which);
+            }
+        });
+        testDialogBuilder.create().show();
+
+
+ /*       AlertDialog.Builder chooseGameModeDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+        chooseGameModeDialogueBuilder.setCancelable(false);
+        chooseGameModeDialogueBuilder.setTitle("Welcome to Unquote: Choose your game mode.");
+        chooseGameModeDialogueBuilder.setMessage("Would you like to play with real life quotes, movie quotes or both?");
+
+        final String[] options = {"Real life", "Movie quotes", "Both"};
+
+        chooseGameModeDialogueBuilder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String selectedOption = options[which];
+
+                Log.d("Options", Arrays.toString(options));
+
+  /*              if (selectedOption.equals("Real life")) {
+                    for (Question q : questions) {
+                        if (q instanceof RealQuotes) {
+                            questions.remove(q);
+
+                        }
+                    }
+                }
+                        else if (selectedOption.equals("Movie quotes")) {
+                            for (Question q : questions) {
+                                if (q instanceof MovieQuotes) {
+                                    questions.remove(q);
+                        }
+                    }
+                }
+*/
+/*
+                if (selectedOption.equals("Real life")) {
+                    removeQuestionsOfType(RealQuotes.class);
+                } else if (selectedOption.equals("Movie quotes")) {
+                    removeQuestionsOfType(MovieQuotes.class);
+                }
+            }
+
+        });
+
+//            countDownTimer.stopTimer();
+        chooseGameModeDialogueBuilder.create().show();
+*/
+
         while (questions.size() > 6) {
             questions.remove(generateRandomNumber(questions.size()));
+
+
         }
     }
+
+
+
+
+    private void removeQuestionsOfType(Class<? extends Question> questionType) {
+        Iterator<Question> iterator = questions.iterator();
+        while (iterator.hasNext()) {
+            Question q = iterator.next();
+            if (questionType.isInstance(q)) {
+                iterator.remove();
+            }
+        }
+    }
+
+
+
 
 
     // TODO #3 add startNewGame() here
@@ -299,20 +388,53 @@ if (validAnswer) {
         // TODO 2-H: Provide actual drawables for each of these questions!
         questions = new ArrayList<>();
 
-        Question question0 = new Question(R.drawable.img_quote_0, "Pretty good advice, and perhaps a scientist did say it… Who actually did?", "Albert Einstein", "Isaac Newton", "Rita Mae Brown", "Rosalind Franklin", 2);
-        Question question1 = new Question(R.drawable.img_quote_1, "Was honest Abe honestly quoted? Who authored this pithy bit of wisdom?", "Edward Stieglitz", "Maya Angelou", "Abraham Lincoln", "Ralph Waldo Emerson", 0);
-        Question question2 = new Question(R.drawable.img_quote_2, "Easy advice to read, difficult advice to follow — who actually said it?", "Martin Luther King Jr.", "Mother Teresa", "Fred Rogers", "Oprah Winfrey", 1);
-        Question question3 = new Question(R.drawable.img_quote_3, "Insanely inspiring, insanely incorrect (maybe). Who is the true source of this inspiration?", "Nelson Mandela", "Harriet Tubman", "Mahatma Gandhi", "Nicholas Klein", 3);
-        Question question4 = new Question(R.drawable.img_quote_4, "A peace worth striving for — who actually reminded us of this?", "Malata Yousafzai", "Martin Luther King Jn.", "Liu Xiaobo", "Dalai Lama", 1);
-        Question question5 = new Question(R.drawable.img_quote_5, "Unfortunately, true — but did Marilyn Monroe convey it or did someone else?", "Laurel Thatcher Ulrich", "Eleanor Roosevelt", "Marilyn Monroe", "Queen Victoria", 0);
-        Question question6 = new Question(R.drawable.img_quote_6, "Here’s the truth, Will Smith did say this, but in which movie?", "Independence Day", "Bad Boys", "Men in Black", "The pursuit of Happyness", 2);
-        Question question7 = new Question(R.drawable.img_quote_7, "Which TV funny gal actually quipped this 1-liner?", "Ellen Degeneres", "Amy Phoeler", "Betty White", "Tina Fey", 3);
-        Question question8 = new Question(R.drawable.img_quote_8, "This mayor won’t get my vote — but did he actually give this piece of advice? And if not, who did?", "Forrest Gump, Forrest Gump", "Dorry, Finding Nemo", "Esther Williams", "The Mayor, Jaws", 1);
-        Question question9 = new Question(R.drawable.img_quote_9, "Her heart will go on, but whose heart is it?", "Whitney Houston", "Diana Ross", "Celine Dion", "Mariah Carey", 2);
-        Question question10 = new Question(R.drawable.img_quote_10, "He’s the king of something alright — to whom does this self-titling line belong to?", "Tony Montana, Scarface", "Joker, The Dark Knight", "Lex Luthor, Batman Vs Superman", "Jack, Titanic", 3);
-        Question question11 = new Question(R.drawable.img_quote_11, "Is “Grey” synonymous for “wise”? If so, maybe Gandalf did preach this advice. If not, who did?", "Yoda, Star Wars", "Gandalf the Grey, Lord of the Rings", "Dumbledore, Harry Potter", "Uncle Ben, Spider-Man", 0);
-        Question question12 = new Question(R.drawable.img_quote_12, "Houston, we have a problem with this quote — which space-traveler does this catch-phrase actually belong to?", "Han Solo, Star Wars", "Captain Kirk, Star Trek", "Buzz Lightyear, Toy Story", "Jim Lovell, Apollo 13", 2);
-        Question question13 = new Question(R.drawable.img_quote_0, "Who said To Be or Not To Be, that is the question, you muppet, I can't believe how long this question is, I wonder if the text size will shrink.", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1);
+        Question question0 = new RealQuotes(R.drawable.img_quote_0, "Pretty good advice, and perhaps a scientist did say it… Who actually did?", "Albert Einstein", "Isaac Newton", "Rita Mae Brown", "Rosalind Franklin", 2, true);
+        Question question1 = new RealQuotes(R.drawable.img_quote_1, "Was honest Abe honestly quoted? Who authored this pithy bit of wisdom?", "Edward Stieglitz", "Maya Angelou", "Abraham Lincoln", "Ralph Waldo Emerson", 0, true);
+        Question question2 = new RealQuotes(R.drawable.img_quote_2, "Easy advice to read, difficult advice to follow — who actually said it?", "Martin Luther King Jr.", "Mother Teresa", "Fred Rogers", "Oprah Winfrey", 1, true);
+        Question question3 = new RealQuotes(R.drawable.img_quote_3, "Insanely inspiring, insanely incorrect (maybe). Who is the true source of this inspiration?", "Nelson Mandela", "Harriet Tubman", "Mahatma Gandhi", "Nicholas Klein", 3, true);
+        Question question4 = new RealQuotes(R.drawable.img_quote_4, "A peace worth striving for — who actually reminded us of this?", "Malata Yousafzai", "Martin Luther King Jn.", "Liu Xiaobo", "Dalai Lama", 1, true);
+        Question question5 = new RealQuotes(R.drawable.img_quote_5, "Unfortunately, true — but did Marilyn Monroe convey it or did someone else?", "Laurel Thatcher Ulrich", "Eleanor Roosevelt", "Marilyn Monroe", "Queen Victoria", 0, true);
+        Question question6 = new MovieQuotes(R.drawable.img_quote_6, "Here’s the truth, Will Smith did say this, but in which movie?", "Independence Day", "Bad Boys", "Men in Black", "The pursuit of Happyness", 2, true);
+        Question question7 = new MovieQuotes(R.drawable.img_quote_7, "Which TV funny gal actually quipped this 1-liner?", "Ellen Degeneres", "Amy Phoeler", "Betty White", "Tina Fey", 3, true);
+        Question question8 = new MovieQuotes(R.drawable.img_quote_8, "This mayor won’t get my vote — but did he actually give this piece of advice? And if not, who did?", "Forrest Gump, Forrest Gump", "Dorry, Finding Nemo", "Esther Williams", "The Mayor, Jaws", 1, true);
+        Question question9 = new MovieQuotes(R.drawable.img_quote_9, "Her heart will go on, but whose heart is it?", "Whitney Houston", "Diana Ross", "Celine Dion", "Mariah Carey", 2, true);
+        Question question10 = new MovieQuotes(R.drawable.img_quote_10, "He’s the king of something alright — to whom does this self-titling line belong to?", "Tony Montana, Scarface", "Joker, The Dark Knight", "Lex Luthor, Batman Vs Superman", "Jack, Titanic", 3, true);
+        Question question11 = new MovieQuotes(R.drawable.img_quote_11, "Is “Grey” synonymous for “wise”? If so, maybe Gandalf did preach this advice. If not, who did?", "Yoda, Star Wars", "Gandalf the Grey, Lord of the Rings", "Dumbledore, Harry Potter", "Uncle Ben, Spider-Man", 0, true);
+        Question question12 = new MovieQuotes(R.drawable.img_quote_12, "Houston, we have a problem with this quote — which space-traveler does this catch-phrase actually belong to?", "Han Solo, Star Wars", "Captain Kirk, Star Trek", "Buzz Lightyear, Toy Story", "Jim Lovell, Apollo 13", 2, true);
+        Question question13 = new MovieQuotes(R.drawable.img_quote_0, "Who said To Be or Not To Be, that is the question, you muppet, I can't believe how long this question is, I wonder if the text size will shrink.", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
+        Question question14 = new RealQuotes(R.drawable.img_quote_1, "Who said My favourite is Hanky, Panky", "Michael McIntyre", "King Charles III", "Gary Chapman", "Bill Clinton", 0, true);
+
+
+/*        AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+        incorrectAnswerDialogueBuilder.setCancelable(false);
+        incorrectAnswerDialogueBuilder.setTitle("Drum Roll Please...");
+        incorrectAnswerDialogueBuilder.setMessage("Sorry the correct answer was: " + correctAnswerDisplay);
+        incorrectAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                questions.remove(getCurrentQuestion());
+
+                if (questions.size() == 1) {
+                    questionsRemainingTextView.setText("Question Remaining");
+                }
+
+                if (questions.size() > 0){
+
+                    chooseNewQuestion();
+                    displayQuestionsRemaining(questions.size());
+                    // TODO: uncomment after implementing displayQuestion()
+                    displayQuestion(getCurrentQuestion());
+                } else {
+                    gameOver();
+                }
+
+
+            }
+        });
+//            countDownTimer.stopTimer();
+        incorrectAnswerDialogueBuilder.create().show();
+*/
 
 
         questions.add(question0);
@@ -328,13 +450,15 @@ if (validAnswer) {
         questions.add(question10);
         questions.add(question11);
         questions.add(question12);
-//        questions.add(question13);
+        questions.add(question13);
+        questions.add(question14);
 
         totalCorrect = 0;
 
         chooseQuestionSet();
         totalQuestions = questions.size();
         questionsRemainingTextView.setText("Questions Remaining");
+
 
 
         Question firstQuestion = chooseNewQuestion();
