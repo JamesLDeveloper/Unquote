@@ -301,15 +301,44 @@ if (validAnswer) {
 
     public void chooseQuestionSet() {
 
-        AlertDialog.Builder testDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        testDialogBuilder.setTitle("Test Dialog");
-        testDialogBuilder.setItems(new String[]{"Option 1", "Option 2"}, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder chooseGameModeDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        chooseGameModeDialogBuilder.setCancelable(false);
+        chooseGameModeDialogBuilder.setTitle("Choose your game mode.");
+
+        final String[] options = {"Real life", "Movie quotes", "Both"};
+
+        chooseGameModeDialogBuilder.setItems(new String[]{"Real Life", "Movie Quotes", "Both"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.d("TestDialog", "Selected Option: " + which);
+
+                String selectedOption = options[which];
+
+           //     Log.d("Options", Arrays.toString(options));
+
+               if (selectedOption.equals("Real life")) {
+                    for (Question q : questions) {
+                        if (q instanceof RealQuotes) {
+                            questions.remove(q);
+
+                        }
+                    }
+                }
+                        else if (selectedOption.equals("Movie quotes")) {
+                            for (Question q : questions) {
+                                if (q instanceof MovieQuotes) {
+                                    questions.remove(q);
+                        }
+                    }
+                }
+
+                while (questions.size() > 6) {
+                    questions.remove(generateRandomNumber(questions.size()));
+                }
+
             }
         });
-        testDialogBuilder.create().show();
+        chooseGameModeDialogBuilder.create().show();
 
 
  /*       AlertDialog.Builder chooseGameModeDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -357,11 +386,8 @@ if (validAnswer) {
         chooseGameModeDialogueBuilder.create().show();
 */
 
-        while (questions.size() > 6) {
-            questions.remove(generateRandomNumber(questions.size()));
 
 
-        }
     }
 
 
