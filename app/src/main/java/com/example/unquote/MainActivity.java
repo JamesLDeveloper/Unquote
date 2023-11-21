@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements MyTimer.TimerCall
 
     String correctAnswerDisplay;
 
+    final String[] options = {"Real life", "Movie quotes", "Both"};
+
+    String selectedOption;
+
 
     //    private ActivityMainBinding binding;
     @Override
@@ -203,7 +207,8 @@ if (validAnswer) {
         });
 
 
-        startNewGame();
+ //       startNewGame();
+        chooseGameMode();
 
     }
 
@@ -301,44 +306,12 @@ if (validAnswer) {
 
     public void chooseQuestionSet() {
 
-        AlertDialog.Builder chooseGameModeDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        chooseGameModeDialogBuilder.setCancelable(false);
-        chooseGameModeDialogBuilder.setTitle("Choose your game mode.");
 
-        final String[] options = {"Real life", "Movie quotes", "Both"};
-
-        chooseGameModeDialogBuilder.setItems(new String[]{"Real Life", "Movie Quotes", "Both"}, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Log.d("TestDialog", "Selected Option: " + which);
-
-                String selectedOption = options[which];
-
-           //     Log.d("Options", Arrays.toString(options));
-
-               if (selectedOption.equals("Real life")) {
-                    for (Question q : questions) {
-                        if (q instanceof RealQuotes) {
-                            questions.remove(q);
-
-                        }
-                    }
-                }
-                        else if (selectedOption.equals("Movie quotes")) {
-                            for (Question q : questions) {
-                                if (q instanceof MovieQuotes) {
-                                    questions.remove(q);
-                        }
-                    }
-                }
 
                 while (questions.size() > 6) {
                     questions.remove(generateRandomNumber(questions.size()));
                 }
 
-            }
-        });
-        chooseGameModeDialogBuilder.create().show();
 
 
  /*       AlertDialog.Builder chooseGameModeDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -406,6 +379,84 @@ if (validAnswer) {
 
 
 
+    public void chooseGameMode(){
+
+        AlertDialog.Builder chooseGameModeDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        chooseGameModeDialogBuilder.setCancelable(false);
+        chooseGameModeDialogBuilder.setTitle("Choose your game mode.");
+
+//        final String[] options = {"Real life", "Movie quotes", "Both"};
+
+        chooseGameModeDialogBuilder.setItems(new String[]{"Real Life", "Movie Quotes", "Both"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("TestDialog", "Selected Option: " + which);
+
+                selectedOption = options[which];
+
+                //     Log.d("Options", Arrays.toString(options));
+
+
+
+startNewGame();
+
+            }
+        });
+        chooseGameModeDialogBuilder.create().show();
+
+
+ /*       AlertDialog.Builder chooseGameModeDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
+        chooseGameModeDialogueBuilder.setCancelable(false);
+        chooseGameModeDialogueBuilder.setTitle("Welcome to Unquote: Choose your game mode.");
+        chooseGameModeDialogueBuilder.setMessage("Would you like to play with real life quotes, movie quotes or both?");
+
+        final String[] options = {"Real life", "Movie quotes", "Both"};
+
+        chooseGameModeDialogueBuilder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String selectedOption = options[which];
+
+                Log.d("Options", Arrays.toString(options));
+
+  /*              if (selectedOption.equals("Real life")) {
+                    for (Question q : questions) {
+                        if (q instanceof RealQuotes) {
+                            questions.remove(q);
+
+                        }
+                    }
+                }
+                        else if (selectedOption.equals("Movie quotes")) {
+                            for (Question q : questions) {
+                                if (q instanceof MovieQuotes) {
+                                    questions.remove(q);
+                        }
+                    }
+                }
+*/
+/*
+                if (selectedOption.equals("Real life")) {
+                    removeQuestionsOfType(RealQuotes.class);
+                } else if (selectedOption.equals("Movie quotes")) {
+                    removeQuestionsOfType(MovieQuotes.class);
+                }
+            }
+
+        });
+
+//            countDownTimer.stopTimer();
+        chooseGameModeDialogueBuilder.create().show();
+*/
+
+
+
+    }
+
+
+
+
 
     // TODO #3 add startNewGame() here
 
@@ -427,8 +478,8 @@ if (validAnswer) {
         Question question10 = new MovieQuotes(R.drawable.img_quote_10, "He’s the king of something alright — to whom does this self-titling line belong to?", "Tony Montana, Scarface", "Joker, The Dark Knight", "Lex Luthor, Batman Vs Superman", "Jack, Titanic", 3, true);
         Question question11 = new MovieQuotes(R.drawable.img_quote_11, "Is “Grey” synonymous for “wise”? If so, maybe Gandalf did preach this advice. If not, who did?", "Yoda, Star Wars", "Gandalf the Grey, Lord of the Rings", "Dumbledore, Harry Potter", "Uncle Ben, Spider-Man", 0, true);
         Question question12 = new MovieQuotes(R.drawable.img_quote_12, "Houston, we have a problem with this quote — which space-traveler does this catch-phrase actually belong to?", "Han Solo, Star Wars", "Captain Kirk, Star Trek", "Buzz Lightyear, Toy Story", "Jim Lovell, Apollo 13", 2, true);
-        Question question13 = new MovieQuotes(R.drawable.img_quote_0, "Who said To Be or Not To Be, that is the question, you muppet, I can't believe how long this question is, I wonder if the text size will shrink.", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
-        Question question14 = new RealQuotes(R.drawable.img_quote_1, "Who said My favourite is Hanky, Panky", "Michael McIntyre", "King Charles III", "Gary Chapman", "Bill Clinton", 0, true);
+        Question question13 = new MovieQuotes(R.drawable.img_quote_0, "Who said To Be or Not To Be, that is the question.", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
+        Question question14 = new RealQuotes(R.drawable.img_quote_1, "Who said \"My favourite is Hanky, Panky\"", "Michael McIntyre", "King Charles III", "Gary Chapman", "Bill Clinton", 0, true);
 
 
 /*        AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -478,8 +529,45 @@ if (validAnswer) {
         questions.add(question12);
         questions.add(question13);
         questions.add(question14);
+        ques
 
         totalCorrect = 0;
+
+
+        if (selectedOption.equals("Real life")) {
+
+            ArrayList<Question> realLifeQuotes = new ArrayList<>();
+
+
+            for (Question q : questions) {
+                if (q instanceof RealQuotes) {
+                    realLifeQuotes.add(q);
+                }
+
+            }
+            questions = realLifeQuotes;
+        }
+
+
+        else if (selectedOption.equals("Movie quotes")) {
+
+            ArrayList<Question> movieQuotes = new ArrayList<>();
+
+            for (Question q : questions) {
+                if (q instanceof MovieQuotes) {
+                    movieQuotes.add(q);
+                }
+            }
+            questions = movieQuotes;
+
+        } else {
+
+        }
+
+
+
+
+
 
         chooseQuestionSet();
         totalQuestions = questions.size();
@@ -632,7 +720,8 @@ if (validAnswer) {
             gameOverDialogueBuilder.setPositiveButton("Play Again!", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    startNewGame();
+                  // startNewGame();
+                    chooseGameMode();
                 }
             });
             displayQuestionsRemaining(questions.size());

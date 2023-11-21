@@ -9,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         MainActivity mainActivity = new MainActivity();
 
-        mainActivity.startNewGame();
+        mainActivity.chooseGameMode();
+//        mainActivity.startNewGame();
 //        System.out.println("Questions remaining: " + mainActivity.totalQuestions);
 //        Question currentQuestion = mainActivity.getCurrentQuestion();
 //        printQuestion(currentQuestion);
