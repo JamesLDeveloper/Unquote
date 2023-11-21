@@ -478,8 +478,13 @@ startNewGame();
         Question question10 = new MovieQuotes(R.drawable.img_quote_10, "He’s the king of something alright — to whom does this self-titling line belong to?", "Tony Montana, Scarface", "Joker, The Dark Knight", "Lex Luthor, Batman Vs Superman", "Jack, Titanic", 3, true);
         Question question11 = new MovieQuotes(R.drawable.img_quote_11, "Is “Grey” synonymous for “wise”? If so, maybe Gandalf did preach this advice. If not, who did?", "Yoda, Star Wars", "Gandalf the Grey, Lord of the Rings", "Dumbledore, Harry Potter", "Uncle Ben, Spider-Man", 0, true);
         Question question12 = new MovieQuotes(R.drawable.img_quote_12, "Houston, we have a problem with this quote — which space-traveler does this catch-phrase actually belong to?", "Han Solo, Star Wars", "Captain Kirk, Star Trek", "Buzz Lightyear, Toy Story", "Jim Lovell, Apollo 13", 2, true);
-        Question question13 = new MovieQuotes(R.drawable.img_quote_0, "Who said To Be or Not To Be, that is the question.", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
+        Question question13 = new MovieQuotes(R.drawable.img_quote_0, "Who said \"To Be or Not To Be, that is the question.\"", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
         Question question14 = new RealQuotes(R.drawable.img_quote_1, "Who said \"My favourite is Hanky, Panky\"", "Michael McIntyre", "King Charles III", "Gary Chapman", "Bill Clinton", 0, true);
+        Question question15 = new MovieQuotes(R.drawable.img_quote_2, "That's Magnum Baby", "Snoop Dog", "The Penguin", "Jerry Maguire", "Maury Ballstein", 3, true);
+        Question question16 = new MovieQuotes(R.drawable.img_quote_3, "There is no Spoon", "Jean Luc Picard", "Neo", "Mad Max", "RoboCop", 1, true);
+        Question question17 = new RealQuotes(R.drawable.img_quote_4, "The way to get started is to quit talking and begin doing", "John Favreau", "James Cameron", "Walt Disney", "Ridley Scott", 2, true);
+        Question question18 = new RealQuotes(R.drawable.img_quote_5, "It is during our darkest moments that we must focus to see the light", "Aristotle", "Plato", "Socrates", "Bill Clinton", 0, true);
+        Question question19 = new RealQuotes(R.drawable.img_quote_6, "Be yourself, everyone else is taken", "Byron", "Oscar Wilde", "Emily Bronte", "Agatha Christie", 1, true);
 
 
 /*        AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -529,7 +534,11 @@ startNewGame();
         questions.add(question12);
         questions.add(question13);
         questions.add(question14);
-        ques
+        questions.add(question15);
+        questions.add(question16);
+        questions.add(question17);
+        questions.add(question18);
+        questions.add(question19);
 
         totalCorrect = 0;
 
@@ -617,7 +626,7 @@ startNewGame();
 
 
             AlertDialog.Builder correctAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
-            correctAnswerDialogueBuilder.setCancelable(true);
+            correctAnswerDialogueBuilder.setCancelable(false);
             correctAnswerDialogueBuilder.setTitle("Drum Roll Please...");
             correctAnswerDialogueBuilder.setMessage("That's right!");
             correctAnswerDialogueBuilder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
