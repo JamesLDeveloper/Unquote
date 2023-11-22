@@ -312,8 +312,6 @@ if (validAnswer) {
                     questions.remove(generateRandomNumber(questions.size()));
                 }
 
-
-
  /*       AlertDialog.Builder chooseGameModeDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
         chooseGameModeDialogueBuilder.setCancelable(false);
         chooseGameModeDialogueBuilder.setTitle("Welcome to Unquote: Choose your game mode.");
@@ -362,8 +360,6 @@ if (validAnswer) {
 
 
     }
-
-
 
 
     private void removeQuestionsOfType(Class<? extends Question> questionType) {
@@ -454,10 +450,6 @@ startNewGame();
 
     }
 
-
-
-
-
     // TODO #3 add startNewGame() here
 
     public void startNewGame() {
@@ -478,13 +470,13 @@ startNewGame();
         Question question10 = new MovieQuotes(R.drawable.img_quote_10, "He’s the king of something alright — to whom does this self-titling line belong to?", "Tony Montana, Scarface", "Joker, The Dark Knight", "Lex Luthor, Batman Vs Superman", "Jack, Titanic", 3, true);
         Question question11 = new MovieQuotes(R.drawable.img_quote_11, "Is “Grey” synonymous for “wise”? If so, maybe Gandalf did preach this advice. If not, who did?", "Yoda, Star Wars", "Gandalf the Grey, Lord of the Rings", "Dumbledore, Harry Potter", "Uncle Ben, Spider-Man", 0, true);
         Question question12 = new MovieQuotes(R.drawable.img_quote_12, "Houston, we have a problem with this quote — which space-traveler does this catch-phrase actually belong to?", "Han Solo, Star Wars", "Captain Kirk, Star Trek", "Buzz Lightyear, Toy Story", "Jim Lovell, Apollo 13", 2, true);
-        Question question13 = new MovieQuotes(R.drawable.img_quote_0, "Who said \"To Be or Not To Be, that is the question.\"", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
-        Question question14 = new RealQuotes(R.drawable.img_quote_1, "Who said \"My favourite is Hanky, Panky\"", "Michael McIntyre", "King Charles III", "Gary Chapman", "Bill Clinton", 0, true);
-        Question question15 = new MovieQuotes(R.drawable.img_quote_2, "That's Magnum Baby", "Snoop Dog", "The Penguin", "Jerry Maguire", "Maury Ballstein", 3, true);
-        Question question16 = new MovieQuotes(R.drawable.img_quote_3, "There is no Spoon", "Jean Luc Picard", "Neo", "Mad Max", "RoboCop", 1, true);
-        Question question17 = new RealQuotes(R.drawable.img_quote_4, "The way to get started is to quit talking and begin doing", "John Favreau", "James Cameron", "Walt Disney", "Ridley Scott", 2, true);
-        Question question18 = new RealQuotes(R.drawable.img_quote_5, "It is during our darkest moments that we must focus to see the light", "Aristotle", "Plato", "Socrates", "Bill Clinton", 0, true);
-        Question question19 = new RealQuotes(R.drawable.img_quote_6, "Be yourself, everyone else is taken", "Byron", "Oscar Wilde", "Emily Bronte", "Agatha Christie", 1, true);
+        Question question13 = new MovieQuotes(R.drawable.spock_with_quote, "Certainly a wise man, but who of these wise men really pondered this?", "Jimminy Cricket", "Hamlet", "George Harrison", "Micheal Schummacher", 1, true);
+        Question question14 = new RealQuotes(R.drawable.samuel_l_jackson_with_quote, "Whose repertoire is this really in?", "Michael McIntyre", "King Charles III", "Gary Chapman", "Bill Clinton", 0, true);
+        Question question15 = new MovieQuotes(R.drawable.queen_elizabeth_ii_2_with_quote, "Who would really have shouted this at the catwalk?", "Snoop Dog - Old School", "Gracie Hart -Miss Congeniality", "Jerry Maguire - Jerry Maguire", "Maury Ballstein - Zoolander", 3, true);
+        Question question16 = new MovieQuotes(R.drawable.gordon_ramsey_3_with_quote, "A cooking quote or from someone deeper down the rabbit hole?", "Jean Luc Picard", "Neo", "Mad Max", "RoboCop", 1, true);
+        Question question17 = new RealQuotes(R.drawable.steven_spielberg_with_quote, "Which famous director wanted to crack on?", "John Favreau", "James Cameron", "Walt Disney", "Ridley Scott", 2, true);
+        Question question18 = new RealQuotes(R.drawable.bill_clinton_with_quote, "Did Bill really utter these inspiring words, if not who from the past claims them?", "Aristotle", "Plato", "Socrates", "Bill Clinton", 0, true);
+        Question question19 = new RealQuotes(R.drawable.olden_days__bloke_with_quote, "Sage advice, which of these famous authors penned this line?", "Lord Byron", "Oscar Wilde", "Emily Bronte", "Agatha Christie", 1, true);
 
 
 /*        AlertDialog.Builder incorrectAnswerDialogueBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -572,11 +564,6 @@ startNewGame();
         } else {
 
         }
-
-
-
-
-
 
         chooseQuestionSet();
         totalQuestions = questions.size();
